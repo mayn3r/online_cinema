@@ -1,0 +1,17 @@
+[project]
+name = "online-cinema"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aerich>=0.8.1",
+    "asyncpg>=0.31.0",
+    "fastapi>=0.138.1",
+    "httpx>=0.28.1",
+    "jinja2>=3.1.6",
+    "pydantic-settings>=2.14.2",
+    "pytest>=9.1.1",
+    "tortoise-orm>=1.1.7",
+    "uvicorn>=0.49.0",
+]
