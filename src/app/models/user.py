@@ -9,6 +9,7 @@ class UserAccount(AbstractBaseModel, TimestampMixin):
     password_hash = fields.CharField(max_length=512)
     
     name = fields.CharField(max_length=128)
+    balance = fields.IntField(default=0)
     username = fields.CharField(max_length=32)
     is_premium = fields.BooleanField(default=False)
     

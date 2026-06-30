@@ -16,3 +16,20 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+# TORTOISE_ORM для Aerich
+TORTOISE_ORM = {
+    "connections": {
+        "default": "sqlite://data/sqlite.db",#settings.DATABASE_URL,
+    },
+    "apps": {
+        "models": {
+            "models": [
+                "src.app.models",    # Ваши модели
+                "aerich.models"      # Модели Aerich (обязательно!)
+            ],
+            "default_connection": "default",
+        }
+    },
+    "timezone": "UTC",
+}

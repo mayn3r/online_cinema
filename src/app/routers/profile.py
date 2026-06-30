@@ -19,6 +19,7 @@ async def profile_info(current_user = Depends(security.token_required())) -> Get
         id=user.id,
         email=user.email,
         name=user.name,
+        balance=user.balance,
         username=user.username,
         create_at=user.create_at.strftime(r"%d.%m.%Y %X")
     )
