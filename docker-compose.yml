@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: cinema_db
+    restart: always
+    environment:
+      # Берем переменные из .env, если их нет - используем значения по умолчанию
+      POSTGRES_USER: ${POSTGRES_USER:-cinema_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cinema_password}
+      POSTGRES_DB: ${POSTGRES_DB:-cinema_db}
+    ports:
+      - "5432:5432" # Пробрасываем порт, чтобы можно было подключиться через DBeaver/pgAdmin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Сохраняем данные БД, чтобы они не удалялись при перезапуске
+    healthcheck:
+      # Проверка готовности БД (чтобы FastAPI не упал с ошибкой connection refused при старте)
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cinema_user} -d ${POSTGRES_DB:-cinema_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  app:
+    build: .
+    container_name: cinema_app
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env # Подгружаем переменные окружения
+    depends_on:
+      db:
+        condition: service_healthy # Ждем, пока БД реально подготовится
+    volumes:
+      # Маунтим код для Hot-Reload (изменения применяются без пересборки Docker!)
+      - ./src:/app/src
+      - ./main.py:/app/main.py
+    # Запускаем с флагом --reload для разработки
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+# Том для хранения данных PostgreSQL
+volumes:
+  postgres_data:
