@@ -7,7 +7,7 @@ from .db import _init_tortoise
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await _init_tortoise(db_url="sqlite://data/sqlite.db", generate_schemas=True)
+    await _init_tortoise(generate_schemas=True)
     
     yield
     

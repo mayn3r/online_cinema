@@ -1,6 +1,7 @@
 from tortoise import fields
 
 from .base import AbstractBaseModel, TimestampMixin
+from src.app.schemas.enums import RoleEnum
 
 
 class UserAccount(AbstractBaseModel, TimestampMixin):
@@ -12,6 +13,7 @@ class UserAccount(AbstractBaseModel, TimestampMixin):
     balance = fields.IntField(default=0)
     username = fields.CharField(max_length=32)
     is_premium = fields.BooleanField(default=False)
+    role = fields.CharEnumField(RoleEnum, default=RoleEnum.USER)
     
     class Meta:
         table="users"

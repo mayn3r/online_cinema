@@ -20,7 +20,7 @@ settings = Settings()
 # TORTOISE_ORM для Aerich
 TORTOISE_ORM = {
     "connections": {
-        "default": "sqlite://data/sqlite.db",#settings.DATABASE_URL,
+        "default": settings.DATABASE_URL,
     },
     "apps": {
         "models": {

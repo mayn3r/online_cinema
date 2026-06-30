@@ -6,7 +6,7 @@ router = APIRouter(
 )
 
 # 8. Базовый маршрут (главная страница)
-@router.get("/")
+@router.get("/", include_in_schema=False)
 async def root(request: Request):
     """
     Главная страница. Рендерит HTML-шаблон.

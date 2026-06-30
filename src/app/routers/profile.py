@@ -14,10 +14,11 @@ async def profile_info(current_user = Depends(security.token_required())) -> Get
     """ Получение информации о профиле """
     
     user = await UserAccount.get(email=current_user.sub)
-    
+    print(current_user)
     return GetUserProfile(
         id=user.id,
         email=user.email,
+        role=current_user.role,
         name=user.name,
         balance=user.balance,
         username=user.username,

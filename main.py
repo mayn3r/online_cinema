@@ -11,7 +11,7 @@ STATIC_DIR = "./src/static"
 app = FastAPI(
     title="Онлайн-кинотеатр",
     description="Учебный проект для практики (2 курс)",
-    version="1.0.0",
+    version="0.1.0",
     lifespan=lifespan,
     timezone="UTC"
 )

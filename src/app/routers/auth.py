@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi import APIRouter, HTTPException, Request, Response
 
 from src.app.schemas.requests.auth import LoginRequest, RegisterRequest
 from src.app.schemas.responses.auth import TokenResponse, AuthResponse
@@ -10,7 +10,6 @@ router = APIRouter(
     prefix="/api/auth",
     tags=["Authorization"]
 )
-
 
 
 @router.post("/register", status_code=201, response_model=AuthResponse)
@@ -40,7 +39,7 @@ async def register(data: RegisterRequest, request: Request, response: Response) 
     uid = user.email
     user_data = {
         "email": user.email,
-        "role": "user"
+        "role": user.role.value
     }
     
     access_token = security.create_access_token(
@@ -52,22 +51,6 @@ async def register(data: RegisterRequest, request: Request, response: Response) 
         user_claims=user_data
     )
     
-    # response.set_cookie(
-    #     key="access_token",
-    #     value=access_token,
-    #     # httponly=True,  # Недоступно для JS
-    #     # secure=True,    # Только HTTPS
-    #     samesite="lax", # Защита от CSRF
-    #     max_age=3600    # 1 час
-    # )
-    # response.set_cookie(
-    #     key="refresh_token",
-    #     value=refresh_token,
-    #     httponly=True,
-    #     secure=True,
-    #     samesite="lax",
-    #     max_age=86400 * 7  # 7 дней
-    # )
     
     security.set_access_cookies(access_token, response, max_age=3600)
     security.set_refresh_cookies(refresh_token, response, max_age=86400*7)
@@ -105,35 +88,17 @@ async def login(data: LoginRequest, response: Response) -> TokenResponse:
     uid = user.email
     user_data = {
         "email": user.email,
-        "role": "user"
+        "role": user.role.value
     }
-    
     
     access_token = security.create_access_token(
         uid=uid,
-        user_claims=user_data
+        data=user_data
     )
     refresh_token = security.create_refresh_token(
         uid=uid,
-        user_claims=user_data
+        data=user_data
     )
-    
-    # response.set_cookie(
-    #     key="access_token",
-    #     value=access_token,
-    #     # httponly=True,  # Недоступно для JS
-    #     # secure=True,    # Только HTTPS
-    #     samesite="lax", # Защита от CSRF
-    #     max_age=3600    # 1 час
-    # )
-    # response.set_cookie(
-    #     key="refresh_token",
-    #     value=refresh_token,
-    #     httponly=True,
-    #     secure=True,
-    #     samesite="lax",
-    #     max_age=86400 * 7  # 7 дней
-    # )
     
     security.set_access_cookies(access_token, response, max_age=3600)
     security.set_refresh_cookies(refresh_token, response, max_age=86400*7)
@@ -144,10 +109,7 @@ async def login(data: LoginRequest, response: Response) -> TokenResponse:
     )
     
 
-@router.post(
-    path="/logout", 
-    dependencies=[Depends(security.access_token_required)]
-)
+@router.post("/logout")
 async def logout(response: Response):
     security.unset_access_cookies(response)
     security.unset_refresh_cookies(response)
