@@ -19,10 +19,15 @@ router = APIRouter(
 async def register(data: RegisterRequest, response: Response) -> AuthResponse:
     """ Регистрация пользователя """
     
-    if await UserAccount.get_or_none(email=data.email):
+    if any(
+            (
+                await UserAccount.get_or_none(email=data.email), 
+                await UserAccount.get_or_none(username=data.username)
+            )
+        ):
         raise HTTPException(
             status_code=409,
-            detail="Почта уже зарегистрирована"
+            detail="Почта или username уже зарегистрированы"
         )
         
     
@@ -41,11 +46,11 @@ async def register(data: RegisterRequest, response: Response) -> AuthResponse:
     
     access_token = security.create_access_token(
         uid=uid,
-        user_claims=user_data
+        data=user_data
     )
     refresh_token = security.create_refresh_token(
         uid=uid,
-        user_claims=user_data
+        data=user_data
     )
     
     

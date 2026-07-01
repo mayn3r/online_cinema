@@ -25,7 +25,7 @@ services:
     container_name: cinema_app
     restart: always
     ports:
-      - "8000:8000"
+      - "8080:8080"
     env_file:
       - .env # Подгружаем переменные окружения
     depends_on:
@@ -36,7 +36,7 @@ services:
       - ./src:/app/src
       - ./main.py:/app/main.py
     # Запускаем с флагом --reload для разработки
-    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    command: uv run main.py #uv run uvicorn main:app --host 0.0.0.0 --port 8080 --reload
 
 # Том для хранения данных PostgreSQL
 volumes:
