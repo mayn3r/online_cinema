@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Query
 
 from src.app.utils.depends import require_admin
 from src.app.utils.orm import get_user
@@ -15,14 +15,12 @@ router = APIRouter(
 )
 
 @router.get("/is_admin")
-async def admin_info(
-    request: Request
-):
-    return {"admin": True}
+async def admin_info():
+    return {"is_admin": True}
 
 
 @router.get("/user_profie", response_model=GetUserProfile)
-async def get_user_profile(data: InputUserEmail) -> GetUserProfile:
+async def get_user_profile(data: InputUserEmail = Query()) -> GetUserProfile:
     """ Получть данные о профиле пользователя """
     
     user: UserAccount = await get_user(email=data.email)
@@ -84,11 +82,17 @@ async def remove_balance(data: ChangeBalanceRequest) -> ChangeBalanceResponse:
     
 
 @router.post("/change_role", response_model=ChangeRoleResponse)
-async def change_role(data: ChangeRoleRequest) -> ChangeRoleResponse:
+async def change_role(data: ChangeRoleRequest = Query()) -> ChangeRoleResponse:
     """ Изменение роли пользователя или администратора """
     
     if data.role.value not in ("user", "admin"):
         raise HTTPException(status_code=400, detail="Non-existent role")
+
+    if data.email == "root@root.ru":
+        raise HTTPException(
+            status_code=400,
+            detail="The role of the root user cannot be changed"
+        )
     
     user: UserAccount = await get_user(email=data.email)
     user.role = data.role

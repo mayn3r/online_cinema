@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 from src.app.schemas.enums import RoleEnum
 
@@ -9,4 +10,4 @@ class GetUserProfile(BaseModel):
     name: str
     balance: int
     username: str
-    create_at: str
+    create_at: str | datetime

@@ -21,6 +21,6 @@ async def profile_info(current_user: UserAccount = Depends(depends.get_current_u
         name=current_user.name,
         balance=current_user.balance,
         username=current_user.username,
-        create_at=current_user.create_at.strftime(r"%d.%m.%Y %X")
+        create_at=current_user.create_at
     )
     
