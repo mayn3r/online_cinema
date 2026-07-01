@@ -3,18 +3,18 @@ from fastapi import Depends, HTTPException, Request
 from .orm import get_user
 from src.app.core.auth_cfg import security
 from src.app.models.user import UserAccount
+from src.app.schemas.enums.role_enums import RoleEnum
 
 
-def require_admin(get_current_user = Depends(security.token_required())):
-    role = get_current_user.role
-    
-    if role != "admin":
-        raise HTTPException(
-            status_code=403,
-            detail="Forbidden"
-        )
-    
-    return get_current_user
+async def get_current_user(data = Depends(security.token_required())):
+    email = data.sub
+    return await get_user(email=email)
+
+
+async def require_admin(current_user: UserAccount = Depends(get_current_user)):
+    if current_user.role != RoleEnum.ADMIN:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    return current_user
 
 
 def require_not_auth(request: Request):
@@ -31,12 +31,3 @@ def require_not_auth(request: Request):
             status_code=403,
             detail="Вы уже авторизованы"
         )
-
-
-
-async def get_current_user(data = Depends(security.token_required())):
-    email = data.sub
-    
-    user: UserAccount = await get_user(email=email)
-    
-    return user

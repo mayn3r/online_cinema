@@ -19,7 +19,7 @@ async def admin_info():
     return {"is_admin": True}
 
 
-@router.get("/user_profie", response_model=GetUserProfile)
+@router.get("/user_profile", response_model=GetUserProfile)
 async def get_user_profile(data: InputUserEmail = Query()) -> GetUserProfile:
     """ Получть данные о профиле пользователя """
     
@@ -51,7 +51,7 @@ async def add_balance(data: ChangeBalanceRequest) -> ChangeBalanceResponse:
             detail="The entered value is outside the available range"
         )
     
-    await UserAccount.save(user)
+    await user.save()
     return ChangeBalanceResponse(
         email=user.email,
         balance=user.balance
@@ -74,7 +74,8 @@ async def remove_balance(data: ChangeBalanceRequest) -> ChangeBalanceResponse:
             detail="The entered value is outside the available range"
         )
     
-    await UserAccount.save(user)
+    await user.save()
+    
     return ChangeBalanceResponse(
         email=user.email,
         balance=user.balance
@@ -82,7 +83,7 @@ async def remove_balance(data: ChangeBalanceRequest) -> ChangeBalanceResponse:
     
 
 @router.post("/change_role", response_model=ChangeRoleResponse)
-async def change_role(data: ChangeRoleRequest = Query()) -> ChangeRoleResponse:
+async def change_role(data: ChangeRoleRequest) -> ChangeRoleResponse:
     """ Изменение роли пользователя или администратора """
     
     if data.role.value not in ("user", "admin"):
@@ -97,7 +98,7 @@ async def change_role(data: ChangeRoleRequest = Query()) -> ChangeRoleResponse:
     user: UserAccount = await get_user(email=data.email)
     user.role = data.role
     
-    await UserAccount.save(user)
+    await user.save()
     
     return ChangeRoleResponse(
         email=user.email,
