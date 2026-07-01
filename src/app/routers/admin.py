@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from src.app.utils.depends import require_admin
 from src.app.utils.orm import get_user

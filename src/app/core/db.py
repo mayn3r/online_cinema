@@ -12,7 +12,7 @@ async def _init_tortoise(
         modules={
             "models": ["src.app.models"]
         },
-        _enable_global_fallback=True,
+        # _enable_global_fallback=True,
         timezone="UTC"
     )
     if generate_schemas:

@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, Request
 
 from .orm import get_user
 from src.app.core.auth_cfg import security
@@ -17,14 +17,21 @@ def require_admin(get_current_user = Depends(security.token_required())):
     return get_current_user
 
 
-def require_not_auth(get_current_user = Depends(security.token_required())):
-    if get_current_user:
+def require_not_auth(request: Request):
+    """
+    Проверяет, что пользователь НЕ авторизован.
+    Смотрит наличие токена в cookies.
+    """
+    
+    # Проверяем access_token в куках
+    token = request.cookies.get("access_token")
+    
+    if token:
         raise HTTPException(
             status_code=403,
             detail="Вы уже авторизованы"
         )
-    
-    return get_current_user
+
 
 
 async def get_current_user(data = Depends(security.token_required())):
