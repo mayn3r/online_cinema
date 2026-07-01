@@ -1,7 +1,7 @@
-from . import index, auth, profile, admin
+from . import auth, pages, profile, admin
 
 routers = [
-    index.router,
+    pages.router,
     admin.router,
     auth.router,
     profile.router

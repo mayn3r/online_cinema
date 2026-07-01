@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Онлайн-Кинотеатр{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
+</head>
+<body>
+    <!-- Навигационный бар -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="/" class="logo">CINEMA<span>.</span></a>
+            
+            <nav class="nav-links">
+                <a href="/">Главная</a>
+                <a href="/movies">Фильмы</a>
+                <a href="/about">О нас</a>
+            </nav>
+
+            <div class="auth-actions">
+                {% if user %}
+                    <!-- Если пользователь авторизован -->
+                    <a href="/auth/profile" class="btn btn-outline">Профиль ({{ user.email }})</a>
+                    <a href="/auth/logout" class="btn btn-primary">Выйти</a>
+                {% else %}
+                    <!-- Если гость -->
+                    <a href="/auth/login" class="btn btn-outline">Войти</a>
+                    <a href="/auth/register" class="btn btn-primary">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 CINEMA. Учебный проект практики 2 курса.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

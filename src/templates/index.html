@@ -1,11 +1,70 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>Добро пожаловать в Онлайн-Кинотеатр!</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Главная - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<!-- Герой-секция (Баннер) -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Мир кино у вас дома</h1>
+        <p>Смотрите тысячи фильмов и сериалов в отличном качестве. Премьеры, классика и эксклюзивные сериалы.</p>
+        <button class="btn btn-large btn-primary" onclick="alert('Выберите фильм из списка ниже!')">Начать просмотр</button>
+    </div>
+</section>
+
+<!-- Секция с фильмами -->
+<section class="movies-section container">
+    <h2 class="section-title">Популярные новинки</h2>
+    <div class="movies-grid">
+        
+        <!-- Карточка фильма 1 -->
+        <div class="movie-card" data-title="Дюна: Часть вторая">
+            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=1');"></div>
+            <div class="movie-info">
+                <h3>Дюна: Часть вторая</h3>
+                <div class="movie-meta">
+                    <span class="year">2024</span>
+                    <span class="rating">★ 8.6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточка фильма 2 -->
+        <div class="movie-card" data-title="Оппенгеймер">
+            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=2');"></div>
+            <div class="movie-info">
+                <h3>Оппенгеймер</h3>
+                <div class="movie-meta">
+                    <span class="year">2023</span>
+                    <span class="rating">★ 8.5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточка фильма 3 -->
+        <div class="movie-card" data-title="Интерстеллар">
+            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=3');"></div>
+            <div class="movie-info">
+                <h3>Интерстеллар</h3>
+                <div class="movie-meta">
+                    <span class="year">2014</span>
+                    <span class="rating">★ 8.6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточка фильма 4 -->
+        <div class="movie-card" data-title="Начало">
+            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=4');"></div>
+            <div class="movie-info">
+                <h3>Начало</h3>
+                <div class="movie-meta">
+                    <span class="year">2010</span>
+                    <span class="rating">★ 8.8</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

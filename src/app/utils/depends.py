@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, Request
+from fastapi import Depends, HTTPException, Request, Cookie
 
 from .orm import get_user
 from src.app.core.auth_cfg import security
@@ -31,3 +31,19 @@ def require_not_auth(request: Request):
             status_code=403,
             detail="Вы уже авторизованы"
         )
+
+
+async def get_current_user_optional(access_token = Cookie(None)):
+    """
+    Возвращает пользователя, если он авторизован, иначе None.
+    Не выбрасывает ошибку 401.
+    """
+    if not access_token:
+        return None
+    try:
+        data = security.verify_token(access_token)
+        if data and data.sub:
+            return await get_user(email=data.sub)
+    except Exception:
+        pass
+    return None
