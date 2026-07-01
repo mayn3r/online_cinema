@@ -1,2 +1,22 @@
-# online_cinema
-Практика за 2 курс ДГТУ: Разработка базы данных для web-приложения «Онлайн-кинотеатр»
+# Онлайн-кинотеатр
+
+#### Установка
+```bash
+git clone https://github.com/mayn3r/online_cinema.git
+cd online_cinema
+```
+
+#### Устанвка пакетного менеджера `uv`
+```bash
+pip install uv
+```
+
+#### Установка необходимых пакетов
+```bash
+uv sync
+```
+
+#### Запуск
+```bash
+uv run main.py
+```
