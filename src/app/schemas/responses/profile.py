@@ -1,9 +1,11 @@
 from pydantic import BaseModel
 
+from src.app.schemas.enums import RoleEnum
+
 class GetUserProfile(BaseModel):
     id: int
     email: str
-    role: str
+    role: RoleEnum
     name: str
     balance: int
     username: str

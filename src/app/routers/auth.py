@@ -1,26 +1,23 @@
-from fastapi import APIRouter, HTTPException, Request, Response
+from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
 from src.app.schemas.requests.auth import LoginRequest, RegisterRequest
-from src.app.schemas.responses.auth import TokenResponse, AuthResponse
+from src.app.schemas.responses.auth import TokenResponse, AuthResponse, AccessTokenResponse
 from src.app.core.auth_cfg import security
 from src.app.models import UserAccount
-from src.app.utils import hashing
+from src.app.utils import hashing, depends
 
 router = APIRouter(
     prefix="/api/auth",
     tags=["Authorization"]
 )
 
-
-@router.post("/register", status_code=201, response_model=AuthResponse)
-async def register(data: RegisterRequest, request: Request, response: Response) -> AuthResponse:
+@router.post("/register", 
+    status_code=201,
+    dependencies=[Depends(depends.require_not_auth)],
+    response_model=AuthResponse
+)
+async def register(data: RegisterRequest, response: Response) -> AuthResponse:
     """ Регистрация пользователя """
-    
-    if request.cookies.get("access_token"):
-        raise HTTPException(
-            status_code=403,
-            detail="Вы уже авторизованы"
-        )
     
     if await UserAccount.get_or_none(email=data.email):
         raise HTTPException(
@@ -115,3 +112,34 @@ async def logout(response: Response):
     security.unset_refresh_cookies(response)
     
     return {"success": True}
+
+
+@router.post("/refresh", 
+    status_code=201,
+    response_model=AccessTokenResponse
+)
+async def update_access_token(
+        request: Request, 
+        current_user = Depends(security.refresh_token_required)
+) -> AccessTokenResponse:
+    """ Обновление access токена """
+    user = await UserAccount.get_or_none(email=current_user.sub)
+    
+    if user is None:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+    
+    user_data = {
+        "email": user.email,
+        "role": user.role.value
+    }
+    
+    access_token = security.create_access_token(
+        uid=user.email,
+        data=user_data
+    )
+    
+    return AccessTokenResponse(access_token=access_token)
+    

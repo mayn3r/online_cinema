@@ -14,3 +14,7 @@ class AuthResponse(BaseModel):
     name: str
     username: str
     tokens: TokenResponse
+
+
+class AccessTokenResponse(BaseModel):
+    access_token: str
