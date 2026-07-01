@@ -15,7 +15,7 @@ dependencies = [
     "pydantic-settings>=2.14.2",
     "pytest>=9.1.1",
     "tomlkit>=0.15.0",
-    "tortoise-orm>=1.1.7",
+    "tortoise-orm==0.24.0",
     "tzdata>=2026.2",
     "uvicorn>=0.49.0",
 ]
