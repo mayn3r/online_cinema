@@ -32,7 +32,11 @@
     <div class="stats-grid">
         <div class="stat-card">
             <h4>Баланс</h4>
-            <div class="value currency">{{ user.balance|default(0) }}</div>
+            {% if user.email == current_user.email %}
+                <div class="value currency">{{ user.balance|default(0) }}</div>
+            {% else %}
+                <div class="value">****</div>
+            {% endif %}
         </div>
         
         <div class="stat-card">
@@ -48,6 +52,7 @@
         </div>
     </div>
 
+    {% if user.email == current_user.email %}
     <!-- Кнопки действий -->
     <div class="profile-actions">
         <a href="/auth/change-password" class="btn btn-outline">Изменить пароль</a>
@@ -60,6 +65,9 @@
 
         <input id="logout-btn" type="button" class="btn btn-primary" onclick="logoutBtn(event)" value="Выйти из аккаунта">
     </div>
+    {% else %}
+        <a href="/" class="btn btn-outline">На главную</a>
+    {% endif %}
 
 </div>
 {% endblock %}

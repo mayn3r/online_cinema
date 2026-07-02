@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import RedirectResponse
 from src.app.core.jinja2 import templates
+from src.app.models.user import UserAccount
 from src.app.utils.depends import get_current_user
 
 router = APIRouter(
@@ -51,4 +53,19 @@ async def profile_page(request: Request, current_user=Depends(get_current_user))
         request=request,
         name="profile.html", 
         context={"title": "Профиль - Онлайн-кинотеатр", "user": current_user}
+    )
+
+@router.get("/@{username}")
+async def user_profile_page(request: Request, username: str):
+    user = await UserAccount.get_or_none(username=username)
+    
+    if user is None:
+        # raise HTTPException(status_code=404, detail="Пользователь не найден")
+        return RedirectResponse(url="/", status_code=302)
+    
+    """ Страница профиля пользователя. Рендерит HTML-шаблон. """
+    return templates.TemplateResponse(
+        request=request,
+        name="profile.html",
+        context={"title": f"Профиль пользователя {username} - Онлайн-кинотеатр", "user": user}
     )

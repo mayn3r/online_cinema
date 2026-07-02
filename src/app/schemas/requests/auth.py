@@ -8,7 +8,7 @@ class RegisterRequest(BaseModel):
     email: str
     password: str
     name: str
-    username: str
+    username: str | None = None  # Сделать username необязательным
     
 
 

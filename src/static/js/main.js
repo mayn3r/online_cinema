@@ -62,7 +62,7 @@ async function registerFormHandler(e) {
     const password = document.getElementById('password').value;
     const confirm_password = document.getElementById('confirm_password').value;
     const name = document.getElementById('name').value;
-    const username = document.getElementById('username').value;
+    const username = null; // Имя пользователя не передается на клиенте
 
     // Простая проверка на клиенте
     if (password !== confirm_password) {
@@ -80,14 +80,13 @@ async function registerFormHandler(e) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password, name, username }),
+        body: JSON.stringify({ email, password, name }),
         credentials: 'include'  // Для cookies
     });
     
     if (response.ok) {
         const data = await response.json();
         console.log('Register success:', data);
-        alert('Регистрация успешна!');
         // Редирект на страницу входа
         window.location.href = '/';
     } else {
