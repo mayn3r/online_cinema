@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 from src.app.core.jinja2 import templates
+from src.app.utils.depends import get_current_user
 
 router = APIRouter(
     tags=["Main routers"]
@@ -40,4 +41,14 @@ async def register_page(request: Request):
         request=request,
         name="register.html", 
         context={"title": "Регистрация - Онлайн-кинотеатр"}
+    )
+
+
+@router.get("/profile")
+async def profile_page(request: Request, current_user=Depends(get_current_user)):
+    """ Страница профиля пользователя. Рендерит HTML-шаблон. """
+    return templates.TemplateResponse(
+        request=request,
+        name="profile.html", 
+        context={"title": "Профиль - Онлайн-кинотеатр", "user": current_user}
     )

@@ -333,3 +333,147 @@ a {
         padding: 20px;
     }
 }
+
+/* --- Страница Профиля --- */
+.profile-container {
+    max-width: 800px; /* Шире, чем формы авторизации */
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+/* Шапка профиля (Аватар + Имя) */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #333;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e50914, #b0060f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.profile-info p {
+    margin: 5px 0 0;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+/* Бейджи ролей */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+}
+
+.badge-user {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    border: 1px solid #555;
+}
+
+.badge-admin {
+    background-color: rgba(229, 9, 20, 0.2);
+    color: #ff4d4d;
+    border: 1px solid #e50914;
+}
+
+.badge-premium {
+    background-color: rgba(245, 197, 24, 0.2);
+    color: #f5c518;
+    border: 1px solid #f5c518;
+    margin-left: 10px;
+}
+
+/* Сетка статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+.stat-card h4 {
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.stat-card .value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.stat-card .value.currency::after {
+    content: " ₽";
+    font-size: 1.2rem;
+    color: #aaa;
+}
+
+/* Блок действий */
+.profile-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    padding-top: 25px;
+    border-top: 1px solid #333;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-actions {
+        flex-direction: column;
+    }
+    .profile-actions .btn {
+        width: 100%;
+    }
+}

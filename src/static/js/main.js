@@ -26,27 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// src/static/js/main.js (добавить в конец)
-
-// Валидация формы регистрации
-const registerForm = document.getElementById("registerForm");
-if (registerForm) {
-    registerForm.addEventListener("submit", function(event) {
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirm_password").value;
-        const errorText = document.getElementById("passwordError");
-
-        if (password !== confirmPassword) {
-            event.preventDefault(); // Отменяем отправку формы
-            errorText.style.display = "block"; // Показываем ошибку
-            document.getElementById("confirm_password").style.borderColor = "#ff4d4d";
-        } else {
-            errorText.style.display = "none";
-            document.getElementById("confirm_password").style.borderColor = "#444";
-        }
-    });
-}
-
 
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault(); // Отменяем стандартную отправку
@@ -75,13 +54,16 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 });
 
 
-document.getElementById('registerForm').addEventListener('submit', async function(e) {
+// document.getElementById('registerForm').addEventListener('submit', async function(e) {
+async function registerFormHandler(e) { 
     e.preventDefault(); // Отменяем стандартную отправку
     
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirm_password = document.getElementById('confirm_password').value;
-    
+    const name = document.getElementById('name').value;
+    const username = document.getElementById('username').value;
+
     // Простая проверка на клиенте
     if (password !== confirm_password) {
         alert('Пароли не совпадают!');
@@ -98,7 +80,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, name, username }),
         credentials: 'include'  // Для cookies
     });
     
@@ -107,12 +89,12 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         console.log('Register success:', data);
         alert('Регистрация успешна!');
         // Редирект на страницу входа
-        window.location.href = '/login';
+        window.location.href = '/';
     } else {
         const error = await response.json();
         alert('Ошибка: ' + (error.detail || 'Неверные данные'));
     }
-});
+};
 
 
 async function logoutBtn(e) {
