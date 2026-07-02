@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 
 from src.app.core.lifespan import lifespan
 from src.app.routers import routers
+from src.app.middlewares import middlewares
 
 STATIC_DIR = "./src/static"
 
@@ -17,8 +18,14 @@ app = FastAPI(
 )
 
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+for middleware in middlewares:
+    app.add_middleware(middleware)
+    
+    
 for router in routers:
     app.include_router(router)
+
 
 
 if __name__ == "__main__":

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Вход - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Вход в аккаунт</h2>
+    
+    {# Блок для вывода ошибок от бэкенда (если роутер передаст переменную error) #}
+    {% if error %}
+        <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1rem; margin-top: 10px;">
+            Войти
+        </button>
+    </form>
+
+    <div class="auth-footer">
+        <p>Нет аккаунта? <a href="/auth/register">Зарегистрироваться</a></p>
+    </div>
+</div>
+{% endblock %}

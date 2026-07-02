@@ -10,7 +10,7 @@
     <!-- Навигационный бар -->
     <header class="navbar">
         <div class="container navbar-container">
-            <a href="/" class="logo">CINEMA<span>.</span></a>
+            <a href="/" class="logo">КИНОТЕАТР<span>.</span></a>
             
             <nav class="nav-links">
                 <a href="/">Главная</a>
@@ -19,14 +19,14 @@
             </nav>
 
             <div class="auth-actions">
-                {% if user %}
+                {% if is_authenticated %}
                     <!-- Если пользователь авторизован -->
-                    <a href="/auth/profile" class="btn btn-outline">Профиль ({{ user.email }})</a>
-                    <a href="/auth/logout" class="btn btn-primary">Выйти</a>
+                    <a href="/profile" class="btn btn-outline">Профиль ({{ current_user.email }})</a>
+                    <input id="logout-btn" type="button" class="btn btn-primary" onclick="logoutBtn(event)" value="Выйти">
                 {% else %}
                     <!-- Если гость -->
-                    <a href="/auth/login" class="btn btn-outline">Войти</a>
-                    <a href="/auth/register" class="btn btn-primary">Регистрация</a>
+                    <a href="/login" class="btn btn-outline">Войти</a>
+                    <a href="/register" class="btn btn-primary">Регистрация</a>
                 {% endif %}
             </div>
         </div>

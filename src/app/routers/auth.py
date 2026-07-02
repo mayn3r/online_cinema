@@ -20,10 +20,10 @@ async def register(data: RegisterRequest, response: Response) -> AuthResponse:
     """ Регистрация пользователя """
     
     if any(
-            (
-                await UserAccount.get_or_none(email=data.email), 
-                await UserAccount.get_or_none(username=data.username)
-            )
+        (
+            await UserAccount.get_or_none(email=data.email), 
+            await UserAccount.get_or_none(username=data.username)
+        )
         ):
         raise HTTPException(
             status_code=409,
@@ -83,7 +83,8 @@ async def login(data: LoginRequest, response: Response) -> TokenResponse:
 
     if not hashing.verify_password(data.password, user.password_hash):
         raise HTTPException(
-            status_code=401
+            status_code=401,
+            detail="Invalid password"
         )
     
     
