@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from src.app.core.jinja2 import templates
 from src.app.models.user import UserAccount
-from src.app.models.movie import Movie, Genre
+from src.app.models.movie import Movie
 from src.app.utils.depends import get_current_user
 
 router = APIRouter(
