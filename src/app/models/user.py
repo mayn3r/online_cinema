@@ -1,11 +1,13 @@
 from tortoise import fields
 
 from .base import AbstractBaseModel, TimestampMixin
+from .extra import Watchlist
 from src.app.schemas.enums import RoleEnum
 
 
 class UserAccount(AbstractBaseModel, TimestampMixin):
     """ Модель пользователя """
+    watchlist: Watchlist
     
     email = fields.CharField(max_length=64, unique=True)
     password_hash = fields.CharField(max_length=512)

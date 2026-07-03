@@ -91,7 +91,7 @@ a {
 
 .nav-links {
     display: flex;
-    gap: 25px;
+    gap: 30px;
 }
 
 .nav-links a {
@@ -1426,5 +1426,70 @@ a {
     .goals-grid,
     .tech-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+
+/* --- Кнопка "Добавить в избранное" --- */
+.btn-watchlist {
+    padding: 14px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-watchlist:hover {
+    border-color: #e50914;
+    color: #e50914;
+    transform: translateY(-2px);
+}
+
+/* Активное состояние (фильм уже в избранном) */
+.btn-watchlist-active {
+    background-color: #e50914;
+    border-color: #e50914;
+    color: #fff;
+}
+
+.btn-watchlist-active:hover {
+    background-color: #b0060f;
+    border-color: #b0060f;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Отключенное состояние (не авторизован) */
+.btn-watchlist-disabled {
+    background-color: #2a2a2a;
+    border-color: #333;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.btn-watchlist-disabled:hover {
+    border-color: #333;
+    color: #666;
+    transform: none;
+}
+
+/* Адаптивность для кнопок */
+@media (max-width: 768px) {
+    .watch-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-watch,
+    .btn-watchlist,
+    .btn-subscribe {
+        width: 100%;
+        text-align: center;
     }
 }

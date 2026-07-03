@@ -83,6 +83,26 @@
                         </button>
                     </a>
                 {% endif %}
+
+                <!-- Кнопка "Добавить в избранное" -->
+                <input type="hidden" id="movie-id" data="{{ movie.id }}">
+                {% if is_authenticated %}
+                    {% if movie.id in watchlist_ids %}
+                        <!-- Фильм уже в избранном -->
+                        <button type="submit" id="watchlist-btn" class="btn-watchlist btn-watchlist-active" onclick="RemoveToWatchListHandler(event)">
+                            ♥ В избранном
+                        </button>
+                    {% else %}
+                        <button type="submit" id="watchlist-btn" class="btn-watchlist" onclick="AddToWatchListHandler(event)">
+                            Добавить в избранное
+                        </button>
+                    {% endif %}
+                {% else %}
+                    <!-- Не авторизован -->
+                    <a href="/login" class="btn-watchlist btn-watchlist-disabled">
+                        ♡ Войдите, чтобы добавить в избранное
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

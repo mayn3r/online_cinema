@@ -16,6 +16,9 @@
                 <a href="/">Главная</a>
                 <a href="/movies">Фильмы</a>
                 <a href="/about">О нас</a>
+                {% if is_authenticated %}
+                    <a href="/watchlist">Избранное</a>
+                {% endif %}
             </nav>
 
             <div class="auth-actions">

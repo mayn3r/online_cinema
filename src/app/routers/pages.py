@@ -5,6 +5,7 @@ from fastapi.responses import RedirectResponse
 from src.app.core.jinja2 import templates
 from src.app.models.user import UserAccount
 from src.app.models.movie import Movie
+from src.app.utils import depends
 from src.app.utils.depends import get_current_user
 
 router = APIRouter(
@@ -93,16 +94,15 @@ async def movies_page(request: Request):
     
     movies = await Movie.all().prefetch_related("genres").order_by("-rating")
     
-    
     return templates.TemplateResponse(
         request=request,
         name="movies.html",
-        context={"title": "Каталог фильмов - Онлайн-Кинотеатр", "movies": movies}
+        context={"movies": movies}
     )
 
 
 @router.get("/movie/{movie_id}")
-async def movie_detail_page(request: Request, movie_id: int):
+async def movie_detail_page(request: Request, movie_id: int, user=Depends(depends.get_current_user_optional)):
     """ Страница деталей фильма. Рендерит HTML-шаблон. """
     movie = await Movie.get_or_none(id=movie_id).prefetch_related("genres")
     
@@ -112,10 +112,20 @@ async def movie_detail_page(request: Request, movie_id: int):
     other_films = await Movie.all().exclude(id=movie.id).prefetch_related('genres')
     other_films = random.sample(other_films, k=5)
     
+    if user:
+        watchlist_movies_ids = await user.watchlist.all().values_list("movie_id", flat=True)
+    else:
+        watchlist_movies_ids = []
+    
     return templates.TemplateResponse(
         request=request,
         name="movie_detail.html",
-        context={"title": f"{movie.title} - Онлайн-Кинотеатр", "movie": movie, "other_films": other_films}
+        context={
+            "title": f"{movie.title} - Онлайн-Кинотеатр", 
+            "movie": movie, 
+            "other_films": other_films,
+            "watchlist_ids": watchlist_movies_ids
+        }
     )
 
 
@@ -137,4 +147,20 @@ async def watch_movie_page(request: Request, movie_id: int, current_user=Depends
         request=request,
         name="watch.html",
         context={"title": f"Смотреть {movie.title} - Онлайн-Кинотеатр", "movie": movie}
+    )
+    
+    
+@router.get("/watchlist")
+async def watchlist_page(request: Request, current_user=Depends(get_current_user)):
+    """ Страница избранного пользователя. Рендерит HTML-шаблон. """
+    
+    watchlist_movies = await current_user.watchlist.all().values_list("movie_id", flat=True)
+    watchlist_movies = await Movie.filter(id__in=watchlist_movies).prefetch_related("genres")
+    
+    print("Watchlist movies:", watchlist_movies)  # Debugging line
+    
+    return templates.TemplateResponse(
+        request=request,
+        name="watchlist.html",
+        context={"movies": watchlist_movies}
     )

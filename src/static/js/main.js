@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
- async function LoginFormHandler(e) {
+async function LoginFormHandler(e) {
     e.preventDefault(); // Отменяем стандартную отправку
     
     const email = document.getElementById('email').value;
@@ -104,6 +104,59 @@ async function logoutBtn(e) {
     });
     if (response.ok) {
         window.location.href = '/login';
+    }
+};
+
+
+async function AddToWatchListHandler(e) {
+    e.preventDefault(); // Отменяем стандартную отправку
+    
+    movie_id = document.getElementById("movie-id").getAttribute("data")
+    console.log(movie_id)
+    
+    const response = await fetch('/api/watchlist/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ movie_id }),
+        credentials: 'include'  // Для cookies
+    });
+    
+    if (response.ok) {
+        const data = await response.json();
+        console.log('Login success:', data);
+        // Редирект или обновление страницы
+        window.location.href = '/movie/' + movie_id;
+    } else {
+        const error = await response.json();
+        console.log("Error: ", error);
+    }
+};
+
+
+async function RemoveToWatchListHandler(e) {
+    e.preventDefault(); // Отменяем стандартную отправку
+    
+    movie_id = document.getElementById("movie-id").getAttribute("data")
+    
+    const response = await fetch('/api/watchlist/remove', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ movie_id }),
+        credentials: 'include'  // Для cookies
+    });
+    
+    if (response.ok) {
+        const data = await response.json();
+        console.log('Login success:', data);
+        // Редирект или обновление страницы
+        window.location.href = '/movie/' + movie_id;
+    } else {
+        const error = await response.json();
+        console.log("Error: ", error);
     }
 };
 
