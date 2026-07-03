@@ -5,7 +5,6 @@ from .base import AbstractBaseModel, TimestampMixin
 
 class Genre(AbstractBaseModel, TimestampMixin):
     """Жанры фильмов (Комедия, Драма и т.д.)"""
-    id = fields.IntField(pk=True)
     name = fields.CharField(max_length=50, unique=True)
 
     class Meta:
@@ -14,11 +13,12 @@ class Genre(AbstractBaseModel, TimestampMixin):
 
 class Movie(AbstractBaseModel, TimestampMixin):
     """Фильмы и сериалы"""
-    id = fields.IntField(pk=True)
     title = fields.CharField(max_length=255)
     description = fields.TextField()
     release_year = fields.IntField()
+    rating = fields.IntField(null=True, default=1)
     
+    poster_url = fields.CharField(max_length=500, null=True)
     video_url = fields.CharField(max_length=500)
     is_premium_only = fields.BooleanField(default=False)
     
@@ -27,3 +27,4 @@ class Movie(AbstractBaseModel, TimestampMixin):
 
     class Meta:
         table = "movies"
+

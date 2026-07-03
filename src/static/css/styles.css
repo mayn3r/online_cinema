@@ -477,3 +477,111 @@ a {
         width: 100%;
     }
 }
+
+
+/* --- Страница Каталога фильмов --- */
+.movies-page-container {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+/* Панель фильтров */
+.filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.filter-chip {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #ccc;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+    background-color: #333;
+    color: #fff;
+    border-color: #666;
+}
+
+.filter-chip.active {
+    background-color: #e50914;
+    color: white;
+    border-color: #e50914;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+/* Расширенные карточки фильмов */
+.movie-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.genre-tag {
+    font-size: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #aaa;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.movie-description {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 12px;
+    line-height: 1.5;
+    /* Обрезаем текст, если он слишком длинный (3 строки) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Бейдж "Премиум" на карточке */
+.premium-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #f5c518, #d4af37);
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+.movie-poster {
+    position: relative; /* Нужно для абсолютного позиционирования premium-badge */
+}

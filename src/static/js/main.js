@@ -107,3 +107,34 @@ async function logoutBtn(e) {
         window.location.href = '/login';
     }
 };
+
+
+// src/static/js/main.js (добавить в конец)
+
+// Фильтрация фильмов на странице каталога
+const filterChips = document.querySelectorAll('.filter-chip');
+const movieCards = document.querySelectorAll('.movie-card');
+
+if (filterChips.length > 0) {
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            // 1. Убираем класс active у всех кнопок
+            filterChips.forEach(c => c.classList.remove('active'));
+            // 2. Добавляем active нажатой кнопке
+            chip.classList.add('active');
+
+            const selectedGenre = chip.getAttribute('data-genre');
+
+            // 3. Фильтруем карточки
+            movieCards.forEach(card => {
+                const cardGenre = card.getAttribute('data-genre');
+                
+                if (selectedGenre === 'all' || cardGenre === selectedGenre) {
+                    card.style.display = 'flex'; // Показываем
+                } else {
+                    card.style.display = 'none'; // Скрываем
+                }
+            });
+        });
+    });
+}

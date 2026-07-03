@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from src.app.core.jinja2 import templates
 from src.app.models.user import UserAccount
+from src.app.models.movie import Movie, Genre
 from src.app.utils.depends import get_current_user
 
 router = APIRouter(
@@ -68,4 +69,24 @@ async def user_profile_page(request: Request, username: str):
         request=request,
         name="profile.html",
         context={"title": f"Профиль пользователя {username} - Онлайн-кинотеатр", "user": user}
+    )
+    
+    
+@router.get("/movies")
+async def movies_page(request: Request):
+    """ Страница каталога фильмов. Рендерит HTML-шаблон. """
+    import pprint
+    
+    # movies = await Movie.all().prefetch_related("genres").values(
+    #     "id", "title", "description", "release_year", "video_url", "is_premium_only", "poster_url", "genres__name"
+    # )
+    
+    movies = await Movie.all().prefetch_related("genres").order_by("-rating")
+    
+    pprint.pprint(movies[0].is_premium_only)
+    
+    return templates.TemplateResponse(
+        request=request,
+        name="movies.html",
+        context={"title": "Каталог фильмов - Онлайн-Кинотеатр", "movies": movies}
     )
