@@ -1,0 +1,1430 @@
+/* --- Сброс и базовые стили --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Кнопки --- */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #e50914;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #f40612;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.btn-large {
+    padding: 12px 30px;
+    font-size: 18px;
+}
+
+/* --- Навигационный бар --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: #e50914;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #e50914;
+}
+
+.auth-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* --- Главный контент (отступ для фиксированного навбара) --- */
+.main-content {
+    padding-top: 70px; 
+}
+
+/* --- Герой-секция --- */
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), 
+                url('https://picsum.photos/1600/900?random=10') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    color: #ddd;
+}
+
+/* --- Секция фильмов --- */
+.movies-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    border-left: 4px solid #e50914;
+    padding-left: 10px;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+/* --- Карточка фильма --- */
+.movie-card {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+    z-index: 10;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 330px; /* Соотношение 2:3 */
+    background-size: cover;
+    background-position: center;
+}
+
+.movie-info {
+    padding: 15px;
+}
+
+.movie-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.rating {
+    color: #f5c518; /* Золотистый цвет для рейтинга */
+    font-weight: bold;
+}
+
+/* --- Анимация появления (JS) --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Подвал --- */
+.footer {
+    background-color: #0a0a0a;
+    padding: 20px 0;
+    text-align: center;
+    color: #666;
+    border-top: 1px solid #333;
+    margin-top: 50px;
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nav-links {
+        gap: 15px;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* --- Страницы авторизации и регистрации --- */
+.auth-container {
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+.auth-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #bbb;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control::placeholder {
+    color: #666;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #e50914;
+    background-color: #333;
+    box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+}
+
+/* Сообщение об ошибке (например, "Неверный пароль") */
+.error-message {
+    background-color: rgba(229, 9, 20, 0.1);
+    color: #ff4d4d;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid rgba(229, 9, 20, 0.3);
+    font-size: 0.9rem;
+}
+
+/* Блок с ссылкой "Нет аккаунта?" */
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.auth-footer a {
+    color: #e50914;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.auth-footer a:hover {
+    color: #ff4d4d;
+    text-decoration: underline;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+/* --- Страница Профиля --- */
+.profile-container {
+    max-width: 800px; /* Шире, чем формы авторизации */
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+/* Шапка профиля (Аватар + Имя) */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #333;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e50914, #b0060f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.profile-info p {
+    margin: 5px 0 0;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+/* Бейджи ролей */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+}
+
+.badge-user {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    border: 1px solid #555;
+}
+
+.badge-admin {
+    background-color: rgba(229, 9, 20, 0.2);
+    color: #ff4d4d;
+    border: 1px solid #e50914;
+}
+
+.badge-premium {
+    background-color: rgba(245, 197, 24, 0.2);
+    color: #f5c518;
+    border: 1px solid #f5c518;
+    margin-left: 10px;
+}
+
+/* Сетка статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+.stat-card h4 {
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.stat-card .value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.stat-card .value.currency::after {
+    content: " ₽";
+    font-size: 1.2rem;
+    color: #aaa;
+}
+
+/* Блок действий */
+.profile-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    padding-top: 25px;
+    border-top: 1px solid #333;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-actions {
+        flex-direction: column;
+    }
+    .profile-actions .btn {
+        width: 100%;
+    }
+}
+
+
+/* --- Страница Каталога фильмов --- */
+.movies-page-container {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+/* Панель фильтров */
+.filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.filter-chip {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #ccc;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+    background-color: #333;
+    color: #fff;
+    border-color: #666;
+}
+
+.filter-chip.active {
+    background-color: #e50914;
+    color: white;
+    border-color: #e50914;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+/* Расширенные карточки фильмов */
+.movie-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.genre-tag {
+    font-size: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #aaa;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.movie-description {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 12px;
+    line-height: 1.5;
+    /* Обрезаем текст, если он слишком длинный (3 строки) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Бейдж "Премиум" на карточке */
+.premium-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #f5c518, #d4af37);
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+.movie-poster {
+    position: relative; /* Нужно для абсолютного позиционирования premium-badge */
+}
+
+
+/* --- Страница конкретного фильма --- */
+.movie-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Hero-секция: Постер + Инфо */
+.movie-hero {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 60px;
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Большой постер */
+.movie-poster-large {
+    flex-shrink: 0;
+    width: 300px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.movie-poster-large img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.premium-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f5c518;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(245, 197, 24, 0.4);
+}
+
+/* Блок информации */
+.movie-info-block {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.movie-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #aaa;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.separator {
+    color: #555;
+}
+
+/* Рейтинг */
+.rating-block {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stars {
+    display: flex;
+    gap: 3px;
+}
+
+.star {
+    color: #444;
+    font-size: 1.3rem;
+}
+
+.star.filled {
+    color: #f5c518;
+}
+
+.rating-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Жанры */
+.genres-block {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.genre-tag {
+    background-color: #2a2a2a;
+    color: #ddd;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+}
+
+.genre-tag:hover {
+    border-color: #e50914;
+    color: #e50914;
+}
+
+/* Описание */
+.movie-description {
+    color: #ccc;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* Режиссёр и актёры */
+.crew-block {
+    margin-bottom: 30px;
+}
+
+.crew-item {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.crew-label {
+    color: #888;
+    font-weight: 500;
+    min-width: 100px;
+}
+
+.crew-value {
+    color: #ddd;
+}
+
+/* Кнопки действий */
+.watch-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.btn-watch {
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-watch.btn-primary {
+    background-color: #e50914;
+    color: white;
+}
+
+.btn-watch.btn-primary:hover {
+    background-color: #f40612;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(229, 9, 20, 0.4);
+}
+
+.btn-watch.btn-premium {
+    background-color: #444;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.btn-subscribe {
+    padding: 14px 25px;
+    background-color: #f5c518;
+    color: #000;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-subscribe:hover {
+    background-color: #ffd700;
+    transform: translateY(-2px);
+}
+
+/* Секция похожих фильмов */
+.similar-movies {
+    margin-top: 40px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 25px;
+    padding-left: 15px;
+    border-left: 4px solid #e50914;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.movie-card-small {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.movie-card-small:hover {
+    transform: translateY(-5px);
+}
+
+.poster-small {
+    width: 100%;
+    height: 270px;
+    background-size: cover;
+    background-position: center;
+}
+
+.movie-card-small h4 {
+    padding: 12px;
+    color: #ddd;
+    font-size: 0.95rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .movie-hero {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .movie-poster-large {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .movie-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .movie-meta-row {
+        justify-content: center;
+    }
+
+    .rating-block {
+        justify-content: center;
+    }
+
+    .genres-block {
+        justify-content: center;
+    }
+
+    .watch-actions {
+        flex-direction: column;
+    }
+
+    .btn-watch, .btn-subscribe {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* --- Страница просмотра фильма --- */
+.watch-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+/* Хлебные крошки */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.breadcrumbs a {
+    color: #888;
+    transition: color 0.3s;
+}
+
+.breadcrumbs a:hover {
+    color: #e50914;
+}
+
+.breadcrumbs .current {
+    color: #aaa;
+}
+
+/* Заголовок */
+.watch-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Контейнер плеера */
+.player-wrapper {
+    width: 100%;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.player-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid #2a2a2a;
+}
+
+.placeholder-content {
+    text-align: center;
+    padding: 40px;
+}
+
+.play-icon {
+    margin-bottom: 25px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.placeholder-title {
+    font-size: 2rem;
+    color: #e50914;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.placeholder-text {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.placeholder-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    color: #aaa;
+    font-size: 0.95rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #333;
+}
+
+/* Секция с информацией */
+.watch-info-section {
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+}
+
+/* Табы */
+.info-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    font-weight: 500;
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+.tab-btn.active {
+    color: #e50914;
+    border-bottom-color: #e50914;
+}
+
+/* Контент табов */
+.tab-content h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.description-text {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+/* Сетка деталей фильма */
+.movie-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.detail-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.detail-label {
+    color: #888;
+    font-weight: 500;
+    min-width: 120px;
+}
+
+.detail-value {
+    color: #ddd;
+}
+
+/* Заглушка отзывов */
+.reviews-placeholder {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
+
+.btn-write-review {
+    margin-top: 15px;
+    padding: 10px 25px;
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-write-review:hover {
+    background-color: #333;
+    border-color: #e50914;
+}
+
+/* Список актёров */
+.actors-list {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* Кнопка назад */
+.back-to-movie {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #2a2a2a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 1px solid #444;
+}
+
+.btn-back:hover {
+    background-color: #333;
+    border-color: #e50914;
+    transform: translateY(-2px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .watch-title {
+        font-size: 1.5rem;
+    }
+
+    .placeholder-title {
+        font-size: 1.5rem;
+    }
+
+    .placeholder-text {
+        font-size: 0.95rem;
+    }
+
+    .placeholder-info {
+        gap: 15px;
+    }
+
+    .info-item {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    .movie-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Страница "О нас" --- */
+.about-page-container {
+    padding-bottom: 60px;
+}
+
+/* Hero-секция */
+.about-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 3px solid #e50914;
+    margin-bottom: 60px;
+}
+
+.about-hero h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Общие секции */
+.about-section,
+.goals-section,
+.tech-section,
+.author-section,
+.practice-section {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    border-left: 4px solid #e50914;
+}
+
+/* Текстовый блок */
+.about-text-block {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.about-text-block p {
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.about-text-block p:last-child {
+    margin-bottom: 0;
+}
+
+.about-text-block strong {
+    color: #e50914;
+    font-weight: 600;
+}
+
+/* Сетка целей */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.goal-card {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    border-color: #e50914;
+    box-shadow: 0 10px 25px rgba(229, 9, 20, 0.2);
+}
+
+.goal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.goal-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+.goal-card p {
+    color: #aaa;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Сетка технологий */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.tech-card {
+    background-color: #1f1f1f;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    border-color: #e50914;
+}
+
+.tech-logo {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.tech-card h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.tech-card p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Карточка автора */
+.author-card {
+    background-color: #1f1f1f;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.author-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e50914, #b0060f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
+}
+
+.author-info h3 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.author-role {
+    color: #e50914;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.author-dept,
+.author-uni {
+    color: #aaa;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.author-links {
+    margin-top: 20px;
+}
+
+.author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background-color: #2a2a2a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+}
+
+.author-link:hover {
+    background-color: #333;
+    border-color: #e50914;
+    transform: translateY(-2px);
+}
+
+.link-icon {
+    font-size: 1.2rem;
+}
+
+/* Секция места практики */
+.practice-info {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.practice-logo {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.practice-details h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.practice-details p {
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .author-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .practice-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .goals-grid,
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог фильмов - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<div class="container movies-page-container">
+    
+    <div class="page-header">
+        <h1>Каталог фильмов</h1>
+        <p>Выберите фильм для просмотра из нашей коллекции</p>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="filters-bar">
+        <button class="filter-chip active" data-genre="all">Все</button>
+        <button class="filter-chip" data-genre="sci-fi">Фантастика</button>
+        <button class="filter-chip" data-genre="action">Боевики</button>
+        <button class="filter-chip" data-genre="drama">Драмы</button>
+        <button class="filter-chip" data-genre="thriller">Триллеры</button>
+        <button class="filter-chip" data-genre="comedy">Комедии</button>
+    </div>
+
+    <!-- Сетка фильмов -->
+    <div class="movies-grid">
+        {% for movie in movies %}
+        <a href="/movie/{{ movie.id }}">
+            <div class="movie-card" data-genre="{{ movie.genre_key }}">
+                <div class="movie-poster" style="background-image: url({{ url_for('posters', path=movie.id|string + '.png') }});">
+                    {% if movie.is_premium_only %}
+                        <span class="premium-badge">★ PREMIUM</span>
+                    {% endif %}
+                </div>
+                <div class="movie-info">
+                    <h3>{{ movie.title }}</h3>
+                    <div class="movie-meta">
+                        <span class="year">{{ movie.year }}</span>
+                        <span class="rating">{{ "★" * movie.rating|int }} <span style="color: white">{{ movie.rating }}</span></span>
+                    </div>
+                    
+                    <div class="movie-genres">
+                        {% for genre in movie.genres %}
+                            <span class="genre-tag">{{ genre.name }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <p class="movie-description">{{ movie.description }}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

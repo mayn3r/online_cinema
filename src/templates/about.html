@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}О проекте - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<div class="about-page-container">
+    <!-- Hero-секция -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1>О проекте</h1>
+            <p class="hero-subtitle">Учебный проект для производственной практики 2 курса</p>
+        </div>
+    </section>
+
+    <!-- Секция "О проекте" -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">Что это за проект?</h2>
+            <div class="about-text-block">
+                <p>
+                    <strong>Онлайн-кинотеатр</strong> — это веб-приложение, разработанное в рамках производственной практики 
+                    2 курса по направлению «Кибербезопасность информационных систем» ДГТУ.
+                </p>
+                <p>
+                    Проект демонстрирует полный цикл разработки современного веб-приложения: от проектирования базы данных 
+                    и backend-логики до создания адаптивного пользовательского интерфейса. Основная цель — показать навыки 
+                    работы с современными технологиями и фреймворками.
+                </p>
+                <p>
+                    Приложение позволяет пользователям просматривать каталог фильмов, получать детальную информацию о каждом 
+                    фильме, регистрироваться и входить в систему, а также управлять своим профилем. Для администраторов 
+                    предусмотрена панель управления с возможностью управления пользователями и их балансом.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "Цели проекта" -->
+    <section class="goals-section">
+        <div class="container">
+            <h2 class="section-title">Цели и задачи</h2>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <div class="goal-icon">🎯</div>
+                    <h3>Проектирование БД</h3>
+                    <p>Разработка реляционной базы данных PostgreSQL с оптимальной структурой таблиц, связей и индексов</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">⚙️</div>
+                    <h3>Backend-разработка</h3>
+                    <p>Создание RESTful API на FastAPI с асинхронной обработкой запросов и JWT-аутентификацией</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">🎨</div>
+                    <h3>Frontend-разработка</h3>
+                    <p>Создание адаптивного пользовательского интерфейса с использованием HTML5, CSS3 и JavaScript</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">🐳</div>
+                    <h3>Контейнеризация</h3>
+                    <p>Настройка Docker и Docker Compose для удобного развёртывания и масштабирования приложения</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">🔒</div>
+                    <h3>Безопасность</h3>
+                    <p>Реализация безопасной аутентификации, хэширования паролей и защиты от распространённых уязвимостей</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">📊</div>
+                    <h3>ORM и миграции</h3>
+                    <p>Использование Tortoise ORM и Aerich для управления схемой базы данных и миграциями</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "Технологии" -->
+    <section class="tech-section">
+        <div class="container">
+            <h2 class="section-title">Используемые технологии</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-logo">🐍</div>
+                    <h3>Python 3.11</h3>
+                    <p>Основной язык программирования</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">⚡</div>
+                    <h3>FastAPI</h3>
+                    <p>Современный async-фреймворк для API</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">🐘</div>
+                    <h3>PostgreSQL</h3>
+                    <p>Надёжная реляционная СУБД</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">📂</div>
+                    <h3>Tortoise ORM</h3>
+                    <p>Асинхронный ORM для Python</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">🐳</div>
+                    <h3>Docker</h3>
+                    <p>Контейнеризация приложения</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">🌐</div>
+                    <h3>HTML5 / CSS3 / JS</h3>
+                    <p>Frontend-технологии</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">🔐</div>
+                    <h3>AuthX</h3>
+                    <p>Библиотека для JWT-аутентификации</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">📦</div>
+                    <h3>UV</h3>
+                    <p>Быстрый пакетный менеджер Python</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "Об авторе" -->
+    <section class="author-section">
+        <div class="container">
+            <h2 class="section-title">Об авторе</h2>
+            <div class="author-card">
+                <div class="author-avatar">
+                    РГ
+                </div>
+                <div class="author-info">
+                    <h3>Рагимов Гамид Керимович</h3>
+                    <p class="author-role">Студент 2 курса, группа ВИ21</p>
+                    <p class="author-dept">Кафедра «Кибербезопасность информационных систем»</p>
+                    <p class="author-uni">Донской государственный технический университет (ДГТУ)</p>
+                    
+                    <div class="author-links">
+                        <a href="https://github.com/mayn3r/online_cinema" target="_blank" class="author-link">
+                            <span class="link-icon"></span>
+                            <span>Репозиторий проекта на GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "Место практики" -->
+    <section class="practice-section">
+        <div class="container">
+            <h2 class="section-title">Место практики</h2>
+            <div class="practice-info">
+                <div class="practice-logo">🏢</div>
+                <div class="practice-details">
+                    <h3>Отдел систем технического контроля ДГТУ</h3>
+                    <p>Производственная практика проходила в отделе систем технического контроля Донского государственного технического университета.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

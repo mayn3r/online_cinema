@@ -147,6 +147,9 @@ activemq-data/
 # SQLite data
 data/
 
+# Other data
+movies_data/
+
 # SageMath parsed files
 *.sage.py
 

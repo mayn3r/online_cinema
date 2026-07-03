@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Создать аккаунт</h2>
+
+    {# Блок для вывода ошибок (например, "Email уже занят") #}
+    {% if error %}
+        <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Имя</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Ваше имя" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Минимум 6 символов" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm_password">Подтвердите пароль</label>
+            <input type="password" id="confirm_password" class="form-control" placeholder="Повторите пароль" required>
+        </div>
+        
+        <input type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1rem; margin-top: 10px;" onclick="registerFormHandler(event)" value="Зарегистрироваться">
+    </form>
+
+    <div class="auth-footer">
+        <p>Уже есть аккаунт? <a href="/auth/login">Войти</a></p>
+    </div>
+</div>
+{% endblock %}

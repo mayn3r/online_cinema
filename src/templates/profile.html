@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Мой профиль - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    
+    <!-- Шапка профиля -->
+    <div class="profile-header">
+        <!-- Аватар с первой буквой email -->
+        <div class="avatar">
+            {{ user.email[0] if user.email else 'U' }}
+        </div>
+        
+        <div class="profile-info">
+            <h2>{{ user.name }}</h2>
+            <h4>@{{ user.username }}</h4>
+            <p>Дата регистрации: {{ user.create_at.strftime('%d.%m.%Y') if user.create_at else 'Неизвестно' }}</p>
+            
+            <!-- Бейджи -->
+            <span class="badge badge-{{ user.role.value|lower }}">{{ user.role.value }}</span>
+            <!-- <p>{{ user.email }}</p> -->
+
+            
+            {% if user.is_premium %}
+                <span class="badge badge-premium">★ Premium</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h4>Баланс</h4>
+            {% if user.email == current_user.email %}
+                <div class="value currency">{{ user.balance|default(0) }}</div>
+            {% else %}
+                <div class="value">****</div>
+            {% endif %}
+        </div>
+        
+        <div class="stat-card">
+            <h4>Подписка</h4>
+            <div class="value" style="color: {% if user.is_premium %}#f5c518{% else %}#888{% endif %};">
+                {% if user.is_premium %}Активна{% else %}Базовая{% endif %}
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <h4>Просмотрено</h4>
+            <div class="value">{{ user.watched_count|default(0) }}</div>
+        </div>
+    </div>
+
+    {% if user.email == current_user.email %}
+    <!-- Кнопки действий -->
+    <div class="profile-actions">
+        <a href="/auth/change-password" class="btn btn-outline">Изменить пароль</a>
+        
+        {% if user.role|lower == 'admin' %}
+            <a href="/admin/dashboard" class="btn btn-outline" style="border-color: #e50914; color: #e50914;">
+                Панель администратора
+            </a>
+        {% endif %}
+
+        <input id="logout-btn" type="button" class="btn btn-primary" onclick="logoutBtn(event)" value="Выйти из аккаунта">
+    </div>
+    {% else %}
+        <a href="/" class="btn btn-outline">На главную</a>
+    {% endif %}
+
+</div>
+{% endblock %}

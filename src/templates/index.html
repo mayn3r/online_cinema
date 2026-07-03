@@ -1,11 +1,50 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>Добро пожаловать в Онлайн-Кинотеатр!</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Главная - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<!-- Герой-секция (Баннер) -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Мир кино у вас дома</h1>
+        <p>Смотрите тысячи фильмов и сериалов в отличном качестве. Премьеры, классика и эксклюзивные сериалы.</p>
+        <button class="btn btn-large btn-primary" onclick="window.location.href='/movies'">Начать просмотр</button>
+    </div>
+</section>
+
+<!-- Секция с фильмами -->
+{% if other_films %}
+    <section class="movies-section container">
+    <h2 class="section-title">Популярные новинки</h2>
+    <div class="movies-grid">
+            {% for mov in other_films %}
+
+                <a href="/movie/{{ mov.id }}">
+                <div class="movie-card" data-genre="{{ mov.genre_key }}">
+                    <div class="movie-poster" style="background-image: url({{ url_for('posters', path=mov.id|string + '.png') }});">
+                        {% if mov.is_premium_only %}
+                            <span class="premium-badge">★ PREMIUM</span>
+                        {% endif %}
+                    </div>
+                    <div class="movie-info">
+                        <h3>{{ mov.title }}</h3>
+                        <div class="movie-meta">
+                            <span class="year">{{ mov.year }}</span>
+                            <span class="rating">{{ "★" * mov.rating|int }} <span style="color: white">{{ mov.rating }}</span></span>
+                        </div>
+                        
+                        <div class="movie-genres">
+                            {% for genre in mov.genres %}
+                                <span class="genre-tag">{{ genre.name }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <p class="movie-description">{{ mov.description }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}

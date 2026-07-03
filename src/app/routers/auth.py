@@ -1,3 +1,5 @@
+import nanoid 
+
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
 from src.app.schemas.requests.auth import LoginRequest, RegisterRequest
@@ -20,15 +22,18 @@ async def register(data: RegisterRequest, response: Response) -> AuthResponse:
     """ Регистрация пользователя """
     
     if any(
-            (
-                await UserAccount.get_or_none(email=data.email), 
-                await UserAccount.get_or_none(username=data.username)
-            )
+        (
+            await UserAccount.get_or_none(email=data.email), 
+            await UserAccount.get_or_none(username=data.username)
+        )
         ):
         raise HTTPException(
             status_code=409,
             detail="Почта или username уже зарегистрированы"
         )
+    
+    if data.username is None:
+        data.username = data.email.split("@")[0] + "_" + nanoid.generate(size=8)
         
     
     user: UserAccount = await UserAccount.create(
@@ -83,7 +88,8 @@ async def login(data: LoginRequest, response: Response) -> TokenResponse:
 
     if not hashing.verify_password(data.password, user.password_hash):
         raise HTTPException(
-            status_code=401
+            status_code=401,
+            detail="Invalid password"
         )
     
     
