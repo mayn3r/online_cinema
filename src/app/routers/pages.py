@@ -90,15 +90,9 @@ async def user_profile_page(request: Request, username: str):
 @router.get("/movies")
 async def movies_page(request: Request):
     """ Страница каталога фильмов. Рендерит HTML-шаблон. """
-    import pprint
-    
-    # movies = await Movie.all().prefetch_related("genres").values(
-    #     "id", "title", "description", "release_year", "video_url", "is_premium_only", "poster_url", "genres__name"
-    # )
     
     movies = await Movie.all().prefetch_related("genres").order_by("-rating")
     
-    pprint.pprint(movies[0].is_premium_only)
     
     return templates.TemplateResponse(
         request=request,
@@ -111,8 +105,6 @@ async def movies_page(request: Request):
 async def movie_detail_page(request: Request, movie_id: int):
     """ Страница деталей фильма. Рендерит HTML-шаблон. """
     movie = await Movie.get_or_none(id=movie_id).prefetch_related("genres")
-    
-    # other_films = await Movie.filter(genres__in=movie.genres).exclude(id=movie_id).limit(5).prefetch_related("genres") if movie else []
     
     if movie is None:
         raise HTTPException(status_code=404, detail="Фильм не найден")
