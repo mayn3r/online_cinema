@@ -17,17 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 2. Обработка клика на карточку (Заглушка)
-    cards.forEach(card => {
-        card.addEventListener("click", () => {
-            const title = card.getAttribute("data-title");
-            alert(`Вы выбрали фильм: "${title}"\n\nСтраница просмотра находится в разработке.`);
-        });
+    // cards.forEach(card => {
+    //     card.addEventListener("click", () => {
+    //         const title = card.getAttribute("data-title");
+    //         alert(`Вы выбрали фильм: "${title}"\n\nСтраница просмотра находится в разработке.`);
+    //     });
     });
-});
 
 
 
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
+ async function LoginFormHandler(e) {
     e.preventDefault(); // Отменяем стандартную отправку
     
     const email = document.getElementById('email').value;
@@ -51,7 +50,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         const error = await response.json();
         alert('Ошибка: Неверный пароль или email');
     }
-});
+};
 
 
 // document.getElementById('registerForm').addEventListener('submit', async function(e) {

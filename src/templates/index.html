@@ -8,63 +8,43 @@
     <div class="hero-content">
         <h1>Мир кино у вас дома</h1>
         <p>Смотрите тысячи фильмов и сериалов в отличном качестве. Премьеры, классика и эксклюзивные сериалы.</p>
-        <button class="btn btn-large btn-primary" onclick="alert('Выберите фильм из списка ниже!')">Начать просмотр</button>
+        <button class="btn btn-large btn-primary" onclick="window.location.href='/movies'">Начать просмотр</button>
     </div>
 </section>
 
 <!-- Секция с фильмами -->
-<section class="movies-section container">
+{% if other_films %}
+    <section class="movies-section container">
     <h2 class="section-title">Популярные новинки</h2>
     <div class="movies-grid">
-        
-        <!-- Карточка фильма 1 -->
-        <div class="movie-card" data-title="Дюна: Часть вторая">
-            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=1');"></div>
-            <div class="movie-info">
-                <h3>Дюна: Часть вторая</h3>
-                <div class="movie-meta">
-                    <span class="year">2024</span>
-                    <span class="rating">★ 8.6</span>
-                </div>
-            </div>
-        </div>
+            {% for mov in other_films %}
 
-        <!-- Карточка фильма 2 -->
-        <div class="movie-card" data-title="Оппенгеймер">
-            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=2');"></div>
-            <div class="movie-info">
-                <h3>Оппенгеймер</h3>
-                <div class="movie-meta">
-                    <span class="year">2023</span>
-                    <span class="rating">★ 8.5</span>
-                </div>
-            </div>
-        </div>
+                <a href="/movie/{{ mov.id }}">
+                <div class="movie-card" data-genre="{{ mov.genre_key }}">
+                    <div class="movie-poster" style="background-image: url({{ url_for('posters', path=mov.id|string + '.png') }});">
+                        {% if mov.is_premium_only %}
+                            <span class="premium-badge">★ PREMIUM</span>
+                        {% endif %}
+                    </div>
+                    <div class="movie-info">
+                        <h3>{{ mov.title }}</h3>
+                        <div class="movie-meta">
+                            <span class="year">{{ mov.year }}</span>
+                            <span class="rating">{{ "★" * mov.rating|int }} <span style="color: white">{{ mov.rating }}</span></span>
+                        </div>
+                        
+                        <div class="movie-genres">
+                            {% for genre in mov.genres %}
+                                <span class="genre-tag">{{ genre.name }}</span>
+                            {% endfor %}
+                        </div>
 
-        <!-- Карточка фильма 3 -->
-        <div class="movie-card" data-title="Интерстеллар">
-            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=3');"></div>
-            <div class="movie-info">
-                <h3>Интерстеллар</h3>
-                <div class="movie-meta">
-                    <span class="year">2014</span>
-                    <span class="rating">★ 8.6</span>
+                        <p class="movie-description">{{ mov.description }}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
+            {% endfor %}
         </div>
-
-        <!-- Карточка фильма 4 -->
-        <div class="movie-card" data-title="Начало">
-            <div class="movie-poster" style="background-image: url('https://picsum.photos/300/450?random=4');"></div>
-            <div class="movie-info">
-                <h3>Начало</h3>
-                <div class="movie-meta">
-                    <span class="year">2010</span>
-                    <span class="rating">★ 8.8</span>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
+    </section>
+    {% endif %}
 {% endblock %}

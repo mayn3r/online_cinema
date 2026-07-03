@@ -1,3 +1,5 @@
+import random
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from src.app.core.jinja2 import templates
@@ -15,10 +17,15 @@ async def root(request: Request):
     """
     Главная страница. Рендерит HTML-шаблон.
     """
+    
+    other_films = await Movie.all().prefetch_related('genres')
+    other_films = random.sample(other_films, k=5)
+    
+    
     return templates.TemplateResponse(
         request=request,
         name="index.html", 
-        context={"title": "Главная - Онлайн-кинотеатр"}
+        context={"title": "Главная - Онлайн-кинотеатр", "other_films": other_films}
     )
 
 
@@ -89,4 +96,45 @@ async def movies_page(request: Request):
         request=request,
         name="movies.html",
         context={"title": "Каталог фильмов - Онлайн-Кинотеатр", "movies": movies}
+    )
+
+
+@router.get("/movie/{movie_id}")
+async def movie_detail_page(request: Request, movie_id: int):
+    """ Страница деталей фильма. Рендерит HTML-шаблон. """
+    movie = await Movie.get_or_none(id=movie_id).prefetch_related("genres")
+    
+    # other_films = await Movie.filter(genres__in=movie.genres).exclude(id=movie_id).limit(5).prefetch_related("genres") if movie else []
+    
+    if movie is None:
+        raise HTTPException(status_code=404, detail="Фильм не найден")
+    
+    other_films = await Movie.all().exclude(id=movie.id).prefetch_related('genres')
+    other_films = random.sample(other_films, k=5)
+    
+    return templates.TemplateResponse(
+        request=request,
+        name="movie_detail.html",
+        context={"title": f"{movie.title} - Онлайн-Кинотеатр", "movie": movie, "other_films": other_films}
+    )
+
+
+@router.get("/movie/watch/{movie_id}")
+async def watch_movie_page(request: Request, movie_id: int, current_user=Depends(get_current_user)):
+    """ Страница просмотра фильма. Рендерит HTML-шаблон. """
+    movie = await Movie.get_or_none(id=movie_id)
+    
+    if movie is None:
+        raise HTTPException(status_code=404, detail="Фильм не найден")
+    
+    movie = await Movie.get(id=movie_id).prefetch_related("genres")
+    
+    # Проверка доступа к премиум-контенту
+    if movie.is_premium_only and (not current_user or not current_user.is_premium):
+        raise HTTPException(status_code=403, detail="Доступ запрещен. Требуется премиум-подписка.")
+    
+    return templates.TemplateResponse(
+        request=request,
+        name="watch.html",
+        context={"title": f"Смотреть {movie.title} - Онлайн-Кинотеатр", "movie": movie}
     )

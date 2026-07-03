@@ -585,3 +585,576 @@ a {
 .movie-poster {
     position: relative; /* Нужно для абсолютного позиционирования premium-badge */
 }
+
+
+/* --- Страница конкретного фильма --- */
+.movie-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Hero-секция: Постер + Инфо */
+.movie-hero {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 60px;
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Большой постер */
+.movie-poster-large {
+    flex-shrink: 0;
+    width: 300px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.movie-poster-large img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.premium-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f5c518;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(245, 197, 24, 0.4);
+}
+
+/* Блок информации */
+.movie-info-block {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.movie-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #aaa;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.separator {
+    color: #555;
+}
+
+/* Рейтинг */
+.rating-block {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stars {
+    display: flex;
+    gap: 3px;
+}
+
+.star {
+    color: #444;
+    font-size: 1.3rem;
+}
+
+.star.filled {
+    color: #f5c518;
+}
+
+.rating-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Жанры */
+.genres-block {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.genre-tag {
+    background-color: #2a2a2a;
+    color: #ddd;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+}
+
+.genre-tag:hover {
+    border-color: #e50914;
+    color: #e50914;
+}
+
+/* Описание */
+.movie-description {
+    color: #ccc;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* Режиссёр и актёры */
+.crew-block {
+    margin-bottom: 30px;
+}
+
+.crew-item {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.crew-label {
+    color: #888;
+    font-weight: 500;
+    min-width: 100px;
+}
+
+.crew-value {
+    color: #ddd;
+}
+
+/* Кнопки действий */
+.watch-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.btn-watch {
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-watch.btn-primary {
+    background-color: #e50914;
+    color: white;
+}
+
+.btn-watch.btn-primary:hover {
+    background-color: #f40612;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(229, 9, 20, 0.4);
+}
+
+.btn-watch.btn-premium {
+    background-color: #444;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.btn-subscribe {
+    padding: 14px 25px;
+    background-color: #f5c518;
+    color: #000;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-subscribe:hover {
+    background-color: #ffd700;
+    transform: translateY(-2px);
+}
+
+/* Секция похожих фильмов */
+.similar-movies {
+    margin-top: 40px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 25px;
+    padding-left: 15px;
+    border-left: 4px solid #e50914;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.movie-card-small {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.movie-card-small:hover {
+    transform: translateY(-5px);
+}
+
+.poster-small {
+    width: 100%;
+    height: 270px;
+    background-size: cover;
+    background-position: center;
+}
+
+.movie-card-small h4 {
+    padding: 12px;
+    color: #ddd;
+    font-size: 0.95rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .movie-hero {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .movie-poster-large {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .movie-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .movie-meta-row {
+        justify-content: center;
+    }
+
+    .rating-block {
+        justify-content: center;
+    }
+
+    .genres-block {
+        justify-content: center;
+    }
+
+    .watch-actions {
+        flex-direction: column;
+    }
+
+    .btn-watch, .btn-subscribe {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* --- Страница просмотра фильма --- */
+.watch-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+/* Хлебные крошки */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.breadcrumbs a {
+    color: #888;
+    transition: color 0.3s;
+}
+
+.breadcrumbs a:hover {
+    color: #e50914;
+}
+
+.breadcrumbs .current {
+    color: #aaa;
+}
+
+/* Заголовок */
+.watch-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Контейнер плеера */
+.player-wrapper {
+    width: 100%;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.player-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid #2a2a2a;
+}
+
+.placeholder-content {
+    text-align: center;
+    padding: 40px;
+}
+
+.play-icon {
+    margin-bottom: 25px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.placeholder-title {
+    font-size: 2rem;
+    color: #e50914;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.placeholder-text {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.placeholder-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    color: #aaa;
+    font-size: 0.95rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #333;
+}
+
+/* Секция с информацией */
+.watch-info-section {
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+}
+
+/* Табы */
+.info-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    font-weight: 500;
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+.tab-btn.active {
+    color: #e50914;
+    border-bottom-color: #e50914;
+}
+
+/* Контент табов */
+.tab-content h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.description-text {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+/* Сетка деталей фильма */
+.movie-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.detail-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.detail-label {
+    color: #888;
+    font-weight: 500;
+    min-width: 120px;
+}
+
+.detail-value {
+    color: #ddd;
+}
+
+/* Заглушка отзывов */
+.reviews-placeholder {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
+
+.btn-write-review {
+    margin-top: 15px;
+    padding: 10px 25px;
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-write-review:hover {
+    background-color: #333;
+    border-color: #e50914;
+}
+
+/* Список актёров */
+.actors-list {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* Кнопка назад */
+.back-to-movie {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #2a2a2a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 1px solid #444;
+}
+
+.btn-back:hover {
+    background-color: #333;
+    border-color: #e50914;
+    transform: translateY(-2px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .watch-title {
+        font-size: 1.5rem;
+    }
+
+    .placeholder-title {
+        font-size: 1.5rem;
+    }
+
+    .placeholder-text {
+        font-size: 0.95rem;
+    }
+
+    .placeholder-info {
+        gap: 15px;
+    }
+
+    .info-item {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    .movie-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}

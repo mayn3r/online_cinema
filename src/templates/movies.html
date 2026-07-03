@@ -23,29 +23,30 @@
     <!-- Сетка фильмов -->
     <div class="movies-grid">
         {% for movie in movies %}
-        <div class="movie-card" data-genre="{{ movie.genre_key }}">
-            <div class="movie-poster" style="background-image: url({{ url_for('posters', path=movie.id|string + '.png') }});">
-                {% if movie.is_premium_only %}
-                    <span class="premium-badge">★ PREMIUM</span>
-                {% endif %}
-            </div>
-            <div class="movie-info">
-                <h3>{{ movie.title }}</h3>
-                <div class="movie-meta">
-                    <span class="year">{{ movie.year }}</span>
-                    <span class="rating">{{ "★" * movie.rating|int }} {{ movie.rating }}</span>
+        <a href="/movie/{{ movie.id }}">
+            <div class="movie-card" data-genre="{{ movie.genre_key }}">
+                <div class="movie-poster" style="background-image: url({{ url_for('posters', path=movie.id|string + '.png') }});">
+                    {% if movie.is_premium_only %}
+                        <span class="premium-badge">★ PREMIUM</span>
+                    {% endif %}
                 </div>
-                
-                <div class="movie-genres">
-                    <!-- <span class="genre-tag">{{ movie.genres|map(attribute='name')|join(' : ') }}</span> -->
-                     {% for genre in movie.genres %}
-                        <span class="genre-tag">{{ genre.name }}</span>
-                     {% endfor %}
-                </div>
+                <div class="movie-info">
+                    <h3>{{ movie.title }}</h3>
+                    <div class="movie-meta">
+                        <span class="year">{{ movie.year }}</span>
+                        <span class="rating">{{ "★" * movie.rating|int }} <span style="color: white">{{ movie.rating }}</span></span>
+                    </div>
+                    
+                    <div class="movie-genres">
+                        {% for genre in movie.genres %}
+                            <span class="genre-tag">{{ genre.name }}</span>
+                        {% endfor %}
+                    </div>
 
-                <p class="movie-description">{{ movie.description }}</p>
+                    <p class="movie-description">{{ movie.description }}</p>
+                </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 

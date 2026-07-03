@@ -17,6 +17,11 @@ class Movie(AbstractBaseModel, TimestampMixin):
     description = fields.TextField()
     release_year = fields.IntField()
     rating = fields.IntField(null=True, default=1)
+    duration = fields.IntField(null=True, default=0) # Длительность в минутах
+    country = fields.CharField(max_length=100, null=True)
+    
+    director = fields.CharField(max_length=100, null=True)
+    actors = fields.TextField(null=True)  # Список актеров через запятую
     
     poster_url = fields.CharField(max_length=500, null=True)
     video_url = fields.CharField(max_length=500)

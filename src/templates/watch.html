@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Просмотр: {{ movie.title }} - Онлайн-Кинотеатр{% endblock %}
+
+{% block content %}
+<div class="watch-page-container">
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+        <a href="/">Главная</a>
+        <span>/</span>
+        <a href="/movies">Фильмы</a>
+        <span>/</span>
+        <a href="/movies/{{ movie.id }}">{{ movie.title }}</a>
+        <span>/</span>
+        <span class="current">Просмотр</span>
+    </div>
+
+    <!-- Заголовок фильма -->
+    <h1 class="watch-title">{{ movie.title }}</h1>
+
+    <!-- Контейнер плеера -->
+    <div class="player-wrapper">
+        <div class="player-placeholder">
+            <div class="placeholder-content">
+                <div class="play-icon">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="11" stroke="#e50914" stroke-width="2"/>
+                        <path d="M10 8L16 12L10 16V8Z" fill="#e50914"/>
+                    </svg>
+                </div>
+                <h2 class="placeholder-title">Плеер недоступен</h2>
+                <p class="placeholder-text">Видеоплеер находится в разработке</p>
+                <div class="placeholder-info">
+                    <span class="info-item">⏱ {{ movie.duration }} мин</span>
+                    <span class="info-item">📅 {{ movie.year }}</span>
+                    <span class="info-item">⭐ {{ movie.rating }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Информация о фильме под плеером -->
+    <div class="watch-info-section">
+        <div class="info-tabs">
+            <button class="tab-btn active" onclick="switchTab('about')">О фильме</button>
+            <button class="tab-btn" onclick="switchTab('reviews')">Отзывы</button>
+            <button class="tab-btn" onclick="switchTab('actors')">Актёры</button>
+        </div>
+
+        <div class="tab-content" id="tab-about">
+            <h3>Описание</h3>
+            <p class="description-text">{{ movie.description }}</p>
+            
+            <div class="movie-details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Жанр:</span>
+                    <span class="detail-value">
+                        {% for genre in movie.genres %}
+                            {{ genre.name }}
+                        {% endfor %}
+                    </span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Режиссёр:</span>
+                    <span class="detail-value">{{ movie.director }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">В ролях:</span>
+                    <span class="detail-value">{{ movie.actors }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Год выпуска:</span>
+                    <span class="detail-value">{{ movie.release_year }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Продолжительность:</span>
+                    <span class="detail-value">{{ movie.duration }} мин</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Страна:</span>
+                    <span class="detail-value">{{ movie.country }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content hidden" id="tab-reviews">
+            <h3>Отзывы пользователей</h3>
+            <div class="reviews-placeholder">
+                <p>Отзывы пока отсутствуют. Будьте первым!</p>
+                <button class="btn-write-review">Написать отзыв</button>
+            </div>
+        </div>
+
+        <div class="tab-content hidden" id="tab-actors">
+            <h3>Актёрский состав</h3>
+            <div class="actors-list">
+                <p>{{ movie.actors }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка "Вернуться к фильму" -->
+    <div class="back-to-movie">
+        <a href="/movies/{{ movie.id }}" class="btn-back">
+            ← Вернуться к описанию фильма
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+function switchTab(tabName) {
+    // Скрываем все табы
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+    });
+    
+    // Убираем активность со всех кнопок
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Показываем нужный таб
+    document.getElementById('tab-' + tabName).classList.remove('hidden');
+    
+    // Активируем кнопку
+    event.target.classList.add('active');
+}
+</script>
+{% endblock %}
