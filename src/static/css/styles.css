@@ -1158,3 +1158,273 @@ a {
         font-size: 0.9rem;
     }
 }
+
+/* --- Страница "О нас" --- */
+.about-page-container {
+    padding-bottom: 60px;
+}
+
+/* Hero-секция */
+.about-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 3px solid #e50914;
+    margin-bottom: 60px;
+}
+
+.about-hero h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Общие секции */
+.about-section,
+.goals-section,
+.tech-section,
+.author-section,
+.practice-section {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    border-left: 4px solid #e50914;
+}
+
+/* Текстовый блок */
+.about-text-block {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.about-text-block p {
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.about-text-block p:last-child {
+    margin-bottom: 0;
+}
+
+.about-text-block strong {
+    color: #e50914;
+    font-weight: 600;
+}
+
+/* Сетка целей */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.goal-card {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    border-color: #e50914;
+    box-shadow: 0 10px 25px rgba(229, 9, 20, 0.2);
+}
+
+.goal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.goal-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+.goal-card p {
+    color: #aaa;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Сетка технологий */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.tech-card {
+    background-color: #1f1f1f;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    border-color: #e50914;
+}
+
+.tech-logo {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.tech-card h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.tech-card p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Карточка автора */
+.author-card {
+    background-color: #1f1f1f;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.author-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e50914, #b0060f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
+}
+
+.author-info h3 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.author-role {
+    color: #e50914;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.author-dept,
+.author-uni {
+    color: #aaa;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.author-links {
+    margin-top: 20px;
+}
+
+.author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background-color: #2a2a2a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+}
+
+.author-link:hover {
+    background-color: #333;
+    border-color: #e50914;
+    transform: translateY(-2px);
+}
+
+.link-icon {
+    font-size: 1.2rem;
+}
+
+/* Секция места практики */
+.practice-info {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.practice-logo {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.practice-details h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.practice-details p {
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .author-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .practice-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .goals-grid,
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -34,6 +34,14 @@ async def health_check():
     return {"status": "ok", "message": "Сервер работает!"}
 
 
+@router.get("/about")
+async def about_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="about.html"
+    )
+
+
 @router.get("/login")
 async def login_page(request: Request):
     """ Страница входа. Рендерит HTML-шаблон. """
