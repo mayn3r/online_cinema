@@ -1,12 +1,10 @@
 from .user import UserAccount
 from .movie import Genre, Movie
-from .extra import Review, WatchHistory, Watchlist
+from .extra import Watchlist
 
 __all__ = (
     "UserAccount",
     "Genre",
-    "Movie",
-    "Review",
-    "WatchHistory", 
+    "Movie", 
     "Watchlist"
 )
